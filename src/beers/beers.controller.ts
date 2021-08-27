@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Render } from '@nestjs/common';
 import { BeersService } from './beers.service';
 import { CreateBeerDto } from './dto/create-beer.dto';
 
@@ -8,8 +8,9 @@ export class BeersController {
   constructor(private readonly beersService: BeersService) {}
 
   @Get()
+  @Render('beers/index')
   findAll() {
-    return this.beersService.findAll();
+    return { beers: this.beersService.findAll() };
   }
 
   @Get(':id')
