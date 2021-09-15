@@ -68,10 +68,7 @@ export class BeersService {
 
   create(createBeerDto: CreateBeerDto): Beer {
     let nextId = this.beers[this.beers.length-1].id + 1;
-    let beer : Beer = {
-      id: nextId,
-      ...createBeerDto
-    };
+    let beer : Beer = new Beer(nextId, createBeerDto.name, createBeerDto.style, createBeerDto.stock);
     this.beers.push(beer);
     return beer;
   }
