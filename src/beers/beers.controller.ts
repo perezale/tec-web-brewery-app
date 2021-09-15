@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { BeersService } from './beers.service';
 import { CreateBeerDto } from './dto/create-beer.dto';
 import { QueryBeersDTO } from './dto/query-beers.dto';
@@ -31,6 +31,11 @@ export class BeersController {
   @Put(':id')
   update(@Param('id') id: number, @Body() updateBeerDto: UpdateBeerDto) : Beer {
     return this.beersService.update(id, updateBeerDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) : void {
+    return this.beersService.remove(id);
   }
   
 }

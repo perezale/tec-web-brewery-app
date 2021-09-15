@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBeerDto } from './dto/create-beer.dto';
 import { UpdateBeerDto } from './dto/update-beer.dto';
 import { Beer } from './interfaces/beer.interface';
@@ -80,5 +80,13 @@ export class BeersService {
     beer.style = updateBeerDto.style;
     beer.stock = updateBeerDto.stock;
     return beer;
+  }
+
+  remove(id: number): void {
+    const beer = this.findOne(id);
+    if (!beer)
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    const pos = this.beers.indexOf(beer);
+    this.beers.splice(pos, 1);
   }
 }
