@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { BeersService } from './beers.service';
 import { CreateBeerDto } from './dto/create-beer.dto';
 import { QueryBeersDTO } from './dto/query-beers.dto';
+import { UpdateBeerDto } from './dto/update-beer.dto';
 import { Beer } from './interfaces/beer.interface';
 
 @Controller('beers')
@@ -25,6 +26,11 @@ export class BeersController {
   @Post()
   create(@Body() createBeerDto: CreateBeerDto) {
     return this.beersService.create(createBeerDto);
+  }
+  
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateBeerDto: UpdateBeerDto) : Beer {
+    return this.beersService.update(id, updateBeerDto);
   }
   
 }

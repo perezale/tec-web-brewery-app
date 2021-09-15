@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBeerDto } from './dto/create-beer.dto';
+import { UpdateBeerDto } from './dto/update-beer.dto';
 import { Beer } from './interfaces/beer.interface';
 
 @Injectable()
@@ -73,4 +74,11 @@ export class BeersService {
     return beer;
   }
 
+  update(id: number, updateBeerDto: UpdateBeerDto): Beer {
+    const beer = this.findOne(id);
+    beer.name = updateBeerDto.name;
+    beer.style = updateBeerDto.style;
+    beer.stock = updateBeerDto.stock;
+    return beer;
+  }
 }
