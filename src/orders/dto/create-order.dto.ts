@@ -1,7 +1,18 @@
+import { Beer } from "src/beers/entities/beer.entity";
 
 export class CreateOrderDto {
-  cart: any;
-  username: string;
+
+  beer: Beer;
+
+  
+  quantity: number;
+
+  
+  clientName: string;
+
+  
   email: string;
+
+  
   address: string;
 }

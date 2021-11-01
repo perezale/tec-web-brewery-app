@@ -3,7 +3,7 @@ import { BeersService } from './beers.service';
 import { CreateBeerDto } from './dto/create-beer.dto';
 import { QueryBeersDTO } from './dto/query-beers.dto';
 import { UpdateBeerDto } from './dto/update-beer.dto';
-import { Beer } from './interfaces/beer.interface';
+import { Beer } from './entities/beer.entity';
 
 @Controller('beers')
 export class BeersController {
@@ -11,7 +11,7 @@ export class BeersController {
   constructor(private readonly beersService: BeersService) {}
 
   @Get()
-  findAll(@Query() query : QueryBeersDTO) : Beer[] {
+  findAll(@Query() query : QueryBeersDTO) : Promise<Beer[]> {
     let style = query.style;
     let sortBy = query.sortBy;
     let orderBy = query.orderBy;
@@ -29,7 +29,7 @@ export class BeersController {
   }
   
   @Put(':id')
-  update(@Param('id') id: number, @Body() updateBeerDto: UpdateBeerDto) : Beer {
+  update(@Param('id') id: number, @Body() updateBeerDto: UpdateBeerDto) : Promise<Beer> {
     return this.beersService.update(id, updateBeerDto);
   }
 

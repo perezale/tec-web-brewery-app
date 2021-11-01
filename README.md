@@ -32,6 +32,8 @@
 $ npm install
 ```
 
+Create the `brewery` database with Adminer at http://localhost:8080/
+
 ## Running the app
 
 ```bash
