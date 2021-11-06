@@ -9,16 +9,16 @@ import { OrdersModule } from './orders/orders.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'secret123!',
-      database: 'brewery',
+      url: process.env.DATABASE_URL,
       entities: [Beer, Order],
       synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
-    BeersModule, 
-    OrdersModule],
+    BeersModule,
+    OrdersModule,
+  ],
   controllers: [],
   providers: [],
 })
